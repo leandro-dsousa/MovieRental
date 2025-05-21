@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieRental.Domain.Entities.Common;
+using MovieRental.Domain.Entities.Rentals;
 
 namespace MovieRental.Domain.Entities.Movies
 {
-    public class Movie
+    public class Movie : AuditableEntity
     {
-        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
 
+        public ICollection<Rental> Rentals { get; set; }
     }
 }

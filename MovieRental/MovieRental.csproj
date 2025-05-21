@@ -19,7 +19,6 @@
     <Folder Include="Application\Services\Customers\" />
     <Folder Include="Application\Services\Movies\" />
     <Folder Include="Application\Services\Rentals\" />
-    <Folder Include="Infrastructure\EntityConfigurations\" />
     <Folder Include="Infrastructure\Migrations\" />
     <Folder Include="Infrastructure\Repositories\Customers\" />
   </ItemGroup>
