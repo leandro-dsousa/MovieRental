@@ -4,7 +4,7 @@ namespace MovieRental.Application.Interfaces.Services
 {
     public interface IRentalService
     {
-        RentalDTO Save(RentalDTO rental);
-        IEnumerable<RentalDTO> GetRentalsByCustomerName(string customerName);
+        Task<RentalDTO> Save(RentalDTO rental);
+        Task<IEnumerable<RentalDTO>> GetRentalsByCustomerName(string customerName);
     }
 }

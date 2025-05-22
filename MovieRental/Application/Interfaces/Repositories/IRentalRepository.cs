@@ -4,5 +4,5 @@ namespace MovieRental.Application.Interfaces.Repositories;
 public interface IRentalRepository
 {
     Task<Rental> Save(Rental rental);
-    IEnumerable<Rental> GetRentalsByCustomerName(string customerName);
+    Task<IEnumerable<Rental>> GetRentalsByCustomerName(string customerName, bool tracking = false);
 }

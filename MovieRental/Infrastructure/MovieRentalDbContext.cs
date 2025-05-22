@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MovieRental.Domain.Entities.Customers;
 using MovieRental.Domain.Entities.Movies;
 using MovieRental.Domain.Entities.Rentals;
 
@@ -6,6 +7,7 @@ namespace MovieRental.Infrastructure
 {
     public class MovieRentalDbContext : DbContext
     {
+        public DbSet<Customer> Customer { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Rental> Rentals { get; set; }
 

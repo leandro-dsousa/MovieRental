@@ -1,4 +1,5 @@
-﻿using MovieRental.Application.DTO.Movies;
+﻿using AutoMapper;
+using MovieRental.Application.DTO.Movies;
 using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Application.Interfaces.Services;
 using MovieRental.Domain.Entities.Movies;
@@ -9,20 +10,48 @@ namespace MovieRental.Application.Services.Movies
     {
 
         private readonly IMovieRepository _movieRepository;
-
-        public MovieService(IMovieRepository movieRepository)
+        private readonly ILogger<MovieService> _logger;
+        private readonly IMapper _mapper;
+        public MovieService(IMovieRepository movieRepository, ILogger<MovieService> logger, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _logger = logger;
+            _mapper = mapper;
         }
 
-        public List<MovieDTO> GetAll()
+        public async Task<List<MovieDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = new List<MovieDTO>();
+
+            try
+            {
+                var movies = await _movieRepository.GetAll();
+                result = _mapper.Map<List<MovieDTO>>(movies);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return result;
         }
 
-        public Movie Save(MovieDTO movie)
+        public async Task<MovieDTO> Save(MovieDTO movieDTO)
         {
-            throw new NotImplementedException();
+            var result = new MovieDTO();
+
+            try
+            {
+                var movie = _mapper.Map<Movie>(movieDTO);
+
+                await _movieRepository.Save(movie);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return movieDTO;
         }
     }
 }

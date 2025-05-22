@@ -4,6 +4,6 @@ namespace MovieRental.Application.Interfaces.Repositories;
 
 public interface IMovieRepository
 {
-    Movie Save(Movie movie);
-    List<Movie> GetAll();
+    Task<Movie> Save(Movie movie);
+    Task<List<Movie>> GetAll(bool tracking = false);
 }

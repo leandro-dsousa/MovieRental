@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using MovieRental.Application.DTO.Rentals;
 using MovieRental.Application.Interfaces.Repositories;
+using MovieRental.Application.Interfaces.Services;
 using MovieRental.Domain.Entities.Rentals;
 
 namespace MovieRental.Controllers
@@ -9,18 +11,26 @@ namespace MovieRental.Controllers
     public class RentalController : ControllerBase
     {
 
-        private readonly IRentalRepository _features;
+        private readonly IRentalService _service;
 
-        public RentalController(IRentalRepository features)
+        public RentalController(IRentalService service)
         {
-            _features = features;
+            _service = service;
         }
 
 
         [HttpPost]
-        public IActionResult Post([FromBody] Rental rental)
+        public async Task<IActionResult> Post([FromBody] RentalDTO rental)
         {
-	        return Ok(_features.Save(rental));
+	        return Ok(await _service.Save(rental));
+        }
+        
+        [HttpGet("{customerName}")]
+        public async Task<IActionResult> GetRentalByCustomerName(string customerName)
+        {
+            var result = await _service.GetRentalsByCustomerName(customerName);
+
+	        return Ok(result);
         }
 
 	}

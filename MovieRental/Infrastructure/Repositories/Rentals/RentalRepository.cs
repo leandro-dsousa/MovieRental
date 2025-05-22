@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Domain.Entities.Rentals;
+using System.Linq;
 
 namespace MovieRental.Infrastructure.Repositories.Rentals
 {
@@ -21,9 +22,17 @@ namespace MovieRental.Infrastructure.Repositories.Rentals
         }
 
         //TODO: finish this method and create an endpoint for it
-        public IEnumerable<Rental> GetRentalsByCustomerName(string customerName)
+        public async Task<IEnumerable<Rental>> GetRentalsByCustomerName(string customerName, bool tracking)
         {
-            return [];
+            return tracking ?
+                await _movieRentalDb.Rentals
+                    .Include(e => e.Customer)
+                    .Where(e => e.Customer.CustomerName == customerName)
+                    .ToListAsync() :
+                await _movieRentalDb.Rentals
+                    .Include(e => e.Customer)
+                    .Where(e => e.Customer.CustomerName == customerName)
+                    .ToListAsync();
         }
 
     }

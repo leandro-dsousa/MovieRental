@@ -5,7 +5,7 @@ namespace MovieRental.Application.Interfaces.Services
 {
     public interface IMovieService
     {
-        Movie Save(MovieDTO movie);
-        List<MovieDTO> GetAll();
+        Task<MovieDTO> Save(MovieDTO movie);
+        Task<List<MovieDTO>> GetAll();
     }
 }

@@ -1,31 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieRental.Application.Interfaces.Repositories;
-using MovieRental.Domain.Entities.Movies;
+using MovieRental.Domain.Entities.Customers;
 
 namespace MovieRental.Infrastructure.Repositories.Movies
 {
-    public class MovieRepository : IMovieRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly MovieRentalDbContext _movieRentalDb;
-        public MovieRepository(MovieRentalDbContext movieRentalDb)
+        public CustomerRepository(MovieRentalDbContext movieRentalDb)
         {
             _movieRentalDb = movieRentalDb;
         }
 
-        public async Task<Movie> Save(Movie movie)
+        public async Task<Customer> Save(Customer customer)
         {
-            await _movieRentalDb.Movies.AddAsync(movie);
+            await _movieRentalDb.Customer.AddAsync(customer);
             _movieRentalDb.SaveChanges();
-            return movie;
+            return customer;
         }
 
         // TODO: tell us what is wrong in this method? Forget about the async, what other concerns do you have?
         // As No Trackings
-        public Task<List<Movie>> GetAll(bool tracking)
+        public Task<List<Customer>> GetAll(bool tracking)
         {
             return tracking ? 
-                _movieRentalDb.Movies.ToListAsync() :
-                _movieRentalDb.Movies
+                _movieRentalDb.Customer.ToListAsync() :
+                _movieRentalDb.Customer
                 .AsNoTracking()
                 .ToListAsync();
         }

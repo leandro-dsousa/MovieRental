@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieRental.Application.DTO.Movies;
 using MovieRental.Application.Interfaces.Repositories;
+using MovieRental.Application.Interfaces.Services;
 using MovieRental.Domain.Entities.Movies;
 
 namespace MovieRental.Controllers
@@ -10,23 +11,23 @@ namespace MovieRental.Controllers
     public class MovieController : ControllerBase
     {
 
-        private readonly IMovieRepository _features;
+        private readonly IMovieService _movieService;
 
-        public MovieController(IMovieRepository features)
+        public MovieController(IMovieService movieService)
         {
-            _features = features;
+            _movieService = movieService;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-	        return Ok(_features.GetAll());
+	        return Ok(_movieService.GetAll());
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] MovieDTO movie)
         {
-	        return Ok(/*_features.Save(movie)*/);
+	        return Ok(_movieService.Save(movie));
         }
     }
 }
