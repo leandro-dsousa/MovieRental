@@ -1,12 +1,12 @@
-﻿using MovieRental.Application.Interfaces.Services;
+﻿using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Domain.Entities.Movies;
 
 namespace MovieRental.Infrastructure.Repositories.Movies
 {
-    public class MovieFeatures : IMovieFeatures
+    public class MovieRepository : IMovieRepository
     {
         private readonly MovieRentalDbContext _movieRentalDb;
-        public MovieFeatures(MovieRentalDbContext movieRentalDb)
+        public MovieRepository(MovieRentalDbContext movieRentalDb)
         {
             _movieRentalDb = movieRentalDb;
         }

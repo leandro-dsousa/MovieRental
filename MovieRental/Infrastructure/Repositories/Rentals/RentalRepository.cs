@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieRental.Application.Interfaces.Services;
+using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Domain.Entities.Rentals;
 
 namespace MovieRental.Infrastructure.Repositories.Rentals
 {
-    public class RentalFeatures : IRentalFeatures
+    public class RentalRepository : IRentalRepository
     {
         private readonly MovieRentalDbContext _movieRentalDb;
-        public RentalFeatures(MovieRentalDbContext movieRentalDb)
+        public RentalRepository(MovieRentalDbContext movieRentalDb)
         {
             _movieRentalDb = movieRentalDb;
         }
 
         //TODO: make me async :(
-        public Rental Save(Rental rental)
+        public async Task<Rental> Save(Rental rental)
         {
-            _movieRentalDb.Rentals.Add(rental);
+            await _movieRentalDb.Rentals.AddAsync(rental);
             _movieRentalDb.SaveChanges();
             return rental;
         }

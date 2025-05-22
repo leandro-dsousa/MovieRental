@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieRental.Application.Interfaces.Services;
+using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Domain.Entities.Rentals;
 
 namespace MovieRental.Controllers
@@ -9,9 +9,9 @@ namespace MovieRental.Controllers
     public class RentalController : ControllerBase
     {
 
-        private readonly IRentalFeatures _features;
+        private readonly IRentalRepository _features;
 
-        public RentalController(IRentalFeatures features)
+        public RentalController(IRentalRepository features)
         {
             _features = features;
         }

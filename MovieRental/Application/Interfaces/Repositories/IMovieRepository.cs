@@ -1,8 +1,8 @@
 ﻿using MovieRental.Domain.Entities.Movies;
 
-namespace MovieRental.Application.Interfaces.Services;
+namespace MovieRental.Application.Interfaces.Repositories;
 
-public interface IMovieFeatures
+public interface IMovieRepository
 {
     Movie Save(Movie movie);
     List<Movie> GetAll();

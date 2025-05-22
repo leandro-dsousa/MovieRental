@@ -1,4 +1,7 @@
+using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Application.Interfaces.Services;
+using MovieRental.Application.Services.Movies;
+using MovieRental.Application.Services.Rentals;
 using MovieRental.Infrastructure;
 using MovieRental.Infrastructure.Repositories.Movies;
 using MovieRental.Infrastructure.Repositories.Rentals;
@@ -10,8 +13,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MovieRentalDbContext>();
 
-builder.Services.AddScoped<IRentalFeatures, RentalFeatures>();
-builder.Services.AddScoped<IMovieFeatures, MovieFeatures>();
+builder.Services.AddScoped<IRentalRepository, RentalRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+builder.Services.AddScoped<IRentalService, RentalService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 
