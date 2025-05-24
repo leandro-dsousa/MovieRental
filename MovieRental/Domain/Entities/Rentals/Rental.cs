@@ -11,6 +11,7 @@ namespace MovieRental.Domain.Entities.Rentals
         public int MovieId { get; set; }
         public string PaymentMethod { get; set; }
         public int CustomerId { get; set; }
+        public double Price { get; set; }
 
         public Customer Customer { get; set; }
         public Movie Movie { get; set; }

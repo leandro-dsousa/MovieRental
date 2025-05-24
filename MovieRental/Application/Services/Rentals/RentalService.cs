@@ -4,6 +4,7 @@ using MovieRental.Application.DTO.Rentals;
 using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Application.Interfaces.Services;
 using MovieRental.Application.Services.Movies;
+using MovieRental.Application.Services.PaymentProviders;
 using MovieRental.Domain.Entities.Rentals;
 using MovieRental.Infrastructure.Repositories.Movies;
 
@@ -46,6 +47,16 @@ namespace MovieRental.Application.Services.Rentals
             var result = new RentalDTO();
 
             try {
+
+                IPaymentProvider paymentProvider = PaymentProviderFactory.GetPaymentProvider(rentalDTO.PaymentMethod);
+
+                bool paymentSuccess = await paymentProvider.Pay(rentalDTO.Price);
+
+                if (!paymentSuccess)
+                {
+                    Console.WriteLine("Payment failed. Rental cannot be saved.");
+                    return result; 
+                }
 
                 var rental = _mapper.Map<Rental>(rentalDTO);
                 await _rentalRepository.Save(rental);
