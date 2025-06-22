@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Domain.Entities.Rentals;
-using System.Linq;
 
 namespace MovieRental.Infrastructure.Repositories.Rentals
 {

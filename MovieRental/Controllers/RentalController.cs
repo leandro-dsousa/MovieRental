@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieRental.Application.DTO.Rentals;
-using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Application.Interfaces.Services;
-using MovieRental.Domain.Entities.Rentals;
 
 namespace MovieRental.Controllers
 {

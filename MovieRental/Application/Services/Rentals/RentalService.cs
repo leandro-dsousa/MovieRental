@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using MovieRental.Application.DTO.Movies;
 using MovieRental.Application.DTO.Rentals;
 using MovieRental.Application.Interfaces.Repositories;
 using MovieRental.Application.Interfaces.Services;
-using MovieRental.Application.Services.Movies;
 using MovieRental.Application.Services.PaymentProviders;
 using MovieRental.Domain.Entities.Rentals;
-using MovieRental.Infrastructure.Repositories.Movies;
 
 namespace MovieRental.Application.Services.Rentals
 {
