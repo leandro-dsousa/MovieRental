@@ -29,6 +29,7 @@ namespace MovieRental.Infrastructure.Repositories.Rentals
                     .Where(e => e.Customer.CustomerName == customerName)
                     .ToListAsync() :
                 await _movieRentalDb.Rentals
+                    .AsNoTracking()
                     .Include(e => e.Customer)
                     .Where(e => e.Customer.CustomerName == customerName)
                     .ToListAsync();

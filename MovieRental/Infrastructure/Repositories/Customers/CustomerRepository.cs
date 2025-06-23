@@ -29,7 +29,5 @@ namespace MovieRental.Infrastructure.Repositories.Movies
                 .AsNoTracking()
                 .ToListAsync();
         }
-
-
     }
 }

@@ -45,6 +45,11 @@ namespace MovieRental.Application.Services.Rentals
 
             try {
 
+                await _rentalRepository.BeginTransaction();
+                
+                var rental = _mapper.Map<Rental>(rentalDTO);
+                await _rentalRepository.Save(rental);
+
                 IPaymentProvider paymentProvider = PaymentProviderFactory.GetPaymentProvider(rentalDTO.PaymentMethod);
 
                 bool paymentSuccess = await paymentProvider.Pay(rentalDTO.Price);
@@ -52,15 +57,17 @@ namespace MovieRental.Application.Services.Rentals
                 if (!paymentSuccess)
                 {
                     Console.WriteLine("Payment failed. Rental cannot be saved.");
+                    await _rentalRepository.RollbackTransaction();
                     return result; 
                 }
 
-                var rental = _mapper.Map<Rental>(rentalDTO);
-                await _rentalRepository.Save(rental);
+                await _rentalRepository.CommitTransaction();
+
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
+                await _rentalRepository.RollbackTransaction();
             }
 
             return result;
